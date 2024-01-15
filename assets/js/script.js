@@ -71,3 +71,28 @@ function forecast5days(lat,lon) {
         forecast5dayEl(data);
     })
 };
+
+function currentDayEl(forecastData) {
+    
+    let currentData = document.getElementById('today');
+    currentData.setAttribute('class', 'border mt-2 p-2');
+
+    let cityName = document.createElement('h2');
+    let dateCurrent = dayjs.unix(forecastData.dt);
+    cityName.textContent = `City: ` + forecastData.name + ` (${dayjs(dateCurrent).format('DD/MM/YYYY')})`;
+
+    let icon = document.createElement('img');
+    icon.setAttribute('src', src=`http://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png`);
+
+    let temp = document.createElement('p');
+    temp.textContent = `Tempature: ` + forecastData.main.temp + `°C`;
+
+    let humidity = document.createElement('p');
+    humidity.textContent = `Humidity: ` + forecastData.main.humidity + `%`;
+
+    let windSpeed = document.createElement('p');
+    windSpeed.textContent = `Wind speed: ` + forecastData.wind.speed + `km/h`;
+
+    cityName.appendChild(icon);
+    currentData.append(cityName, temp, humidity, windSpeed);
+};
