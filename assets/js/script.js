@@ -83,7 +83,7 @@ function currentDayEl(forecastData) {
     cityName.textContent = `City: ` + forecastData.name + ` (${dayjs(dateCurrent).format('DD/MM/YYYY')})`;
 
     let icon = document.createElement('img');
-    icon.setAttribute('src', src=`http://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png`);
+    icon.setAttribute('src', src=`https://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png`);
 
     let temp = document.createElement('p');
     temp.textContent = `Tempature: ` + forecastData.main.temp + `°C`;
@@ -121,7 +121,7 @@ function forecast5dayEl(forecastData) {
     date.textContent = `${dayjs(dateCurrent).format('DD/MM/YYYY')}`;
 
     let icon = document.createElement('img');
-    icon.setAttribute('src', src=`http://openweathermap.org/img/wn/${datesArray.weather[0].icon}.png`);
+    icon.setAttribute('src', src=`https://openweathermap.org/img/wn/${datesArray.weather[0].icon}.png`);
 
     let temp = document.createElement('p');
     temp.textContent = `Tempature: ` + datesArray.main.temp + `°C`;
