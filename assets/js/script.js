@@ -137,3 +137,42 @@ function forecast5dayEl(forecastData) {
     forecastContainer.append(dateBox);
     };
 };
+
+// function to store city name to local storage
+function storeCityName(cityName) {
+
+    let searchHistory = JSON.parse(localStorage.getItem('City')) || [];
+
+    if(searchHistory.includes(cityName) !== true){
+        searchHistory.push(cityName);
+        localStorage.setItem('City', JSON.stringify(searchHistory));
+    };
+    listCityButtons();
+};
+    
+//function to list history search as buttons
+function listCityButtons(){
+
+    let searchHistory = JSON.parse(localStorage.getItem('City')) || [];
+
+    for(let i = 0; i < searchHistory.length; i++) {
+
+        let historyBox = document.getElementById('history');
+        let buttonCity = document.createElement('button');
+        buttonCity.setAttribute('class', 'btn btn-outline-primary m-2 ');
+        buttonCity.textContent = searchHistory[i];
+        buttonCity.addEventListener('click', getDataButton);
+        historyBox.append(buttonCity);
+    };
+};
+
+// function to get weather info after clicking on buttons in search history section
+function getDataButton(event){
+    event.preventDefault();
+
+    let buttonCityName = event.target.textContent;
+
+    getDataWeather(buttonCityName);
+};
+
+listCityButtons();
