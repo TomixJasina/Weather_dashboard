@@ -17,3 +17,30 @@ submitButton.addEventListener('click', function(event){
         return;
     }
 });
+
+// function to get location of the searched city and then start other functions
+
+function getDataWeather(city){
+
+document.getElementById('today').innerHTML = '';
+
+document.getElementById('forecast').innerHTML = '';
+
+document.getElementById('history').innerHTML = '';
+
+let getLocationURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKEY}&units=metric`;
+
+fetch(getLocationURL)
+.then(function (response){
+    return response.json();
+})
+.then(function(data){
+    let latLoc = data[0].lat;
+    let lonLoc = data[0].lon;
+    let cityName = data[0].name;
+
+    currentDay(latLoc,lonLoc);
+    forecast5days(latLoc,lonLoc);
+    storeCityName(cityName);
+})
+};
