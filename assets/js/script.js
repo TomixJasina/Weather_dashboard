@@ -72,6 +72,7 @@ function forecast5days(lat,lon) {
     })
 };
 
+// function to create elements for current day weather
 function currentDayEl(forecastData) {
     
     let currentData = document.getElementById('today');
@@ -95,4 +96,44 @@ function currentDayEl(forecastData) {
 
     cityName.appendChild(icon);
     currentData.append(cityName, temp, humidity, windSpeed);
+};
+
+// function to create element for 5 days weather forecast
+function forecast5dayEl(forecastData) {
+
+    let forecastEl = document.getElementById('forecast');
+    let forecastTitle = document.createElement('h3');
+    forecastTitle.textContent = '5-day forecast: '
+
+    let forecastContainer = document.createElement('div');
+    forecastContainer.setAttribute('class', 'd-flex justify-content-between');
+    forecastEl.append(forecastTitle,forecastContainer);
+
+    for (let i=7; i < 40; i+=8){
+
+    let datesArray = forecastData.list[i];
+
+    let dateBox = document.createElement('div');
+    dateBox.setAttribute('class', 'bg-primary-subtle col-lg-2  p-2');
+
+    let date = document.createElement('h4');
+    let dateCurrent = dayjs.unix(datesArray.dt);
+    date.textContent = `${dayjs(dateCurrent).format('DD/MM/YYYY')}`;
+
+    let icon = document.createElement('img');
+    icon.setAttribute('src', src=`http://openweathermap.org/img/wn/${datesArray.weather[0].icon}.png`);
+
+    let temp = document.createElement('p');
+    temp.textContent = `Tempature: ` + datesArray.main.temp + `°C`;
+
+    let humidity = document.createElement('p');
+    humidity.textContent = `Humidity: ` + datesArray.main.humidity + `%`;
+
+    let windSpeed = document.createElement('p');
+    windSpeed.textContent = `Wind speed: ` + datesArray.wind.speed + `km/h`;
+
+    dateBox.append(date, icon, temp, humidity, windSpeed);
+
+    forecastContainer.append(dateBox);
+    };
 };
