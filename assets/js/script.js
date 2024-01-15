@@ -44,3 +44,16 @@ fetch(getLocationURL)
     storeCityName(cityName);
 })
 };
+
+// function to fetch current day weather info
+function currentDay(lat,lon){
+    let currentDayURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKEY}&units=metric`;
+    
+    fetch(currentDayURL)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        currentDayEl(data);
+    })
+};
