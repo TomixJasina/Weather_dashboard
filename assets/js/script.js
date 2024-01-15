@@ -57,3 +57,17 @@ function currentDay(lat,lon){
         currentDayEl(data);
     })
 };
+
+// function to fetch forecast for 5 days info
+
+function forecast5days(lat,lon) {
+    let forecast5daysURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKEY}&units=metric`;
+
+    fetch(forecast5daysURL)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        forecast5dayEl(data);
+    })
+};
